@@ -155,3 +155,36 @@ def func(index,total,subset):
         subset.pop()
 func(0,4,[])
 print(result)
+
+#Subset sum 
+arr=[5,4,9]#Brute force approach
+result=[]
+summ=[]
+def subset_sum(index,total,subset):
+    if index==len(arr):
+        result.append(subset.copy())
+        summ.append(total)
+        return
+    subset.append(arr[index])
+    summm=total+arr[index]
+    subset_sum(index+1,summm,subset)
+    subset.pop()
+    subset_sum(index+1,total,subset)
+subset_sum(0,0,[])
+print(result)
+print(summ)
+
+#Subset sum optimmal approach
+arr=[5,4,9]
+result=[]
+def subset_sum_optimal(index,total):
+    if index>=len(arr):
+        result.append(total)
+        return
+    summ=total+arr[index]
+    subset_sum_optimal(index+1,summ)
+    summ=total
+    subset_sum_optimal(index+1,summ)
+subset_sum_optimal(0,0)
+print(result)
+
