@@ -188,3 +188,22 @@ def subset_sum_optimal(index,total):
 subset_sum_optimal(0,0)
 print(result)
 
+
+#combinational sum 3
+result=[]
+target=8
+k=2
+def func(index,total,subset):
+    if total==target and len(subset)==k:
+        result.append(subset.copy())
+        return
+    if total>target and  len(subset)>k:
+        return 
+    for i in range(index,10):
+        summ=total+i
+        subset.append(i)
+        func(i+1,summ,subset)
+        subset.pop()      
+func(1,0,[])
+print(result)
+
