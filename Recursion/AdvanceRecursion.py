@@ -231,3 +231,86 @@ def func(index,subset):
 func(0,[])
 print(result)
 
+#N Queens 
+class queen:
+    def solve(self,col,board,ans,n):# Any doubt refer code and debug video 
+        
+        if col==n:
+            ans.append(list(board))
+            return
+        for row in range(n):
+            if self.isSafe(row,col,n,board):
+                board[row]=board[row][:col]+"Q"+board[row][col+1:]
+                self.solve(col+1,board,ans,n)
+                board[row]=board[row][:col]+"."+board[row][col+1:]
+        return ans
+
+
+    def isSafe(self,row,col,n,board):
+        duprow=row
+        dupcol=col
+        while row>=0 and col>=0:
+            if board[row][col]=="Q":
+                return False
+            row-=1
+            col-=1
+        row=duprow
+        col=dupcol
+        while col>=0:
+            if board[row][col]=="Q":
+                return False
+            col-=1
+        row=duprow
+        col=dupcol
+        while row<n and col>=0:
+            if board[row][col]=="Q":
+                return False
+            row+=1
+            col-=1
+        return True
+
+solution=queen()
+n = 4
+board = ["." * n for _ in range(n)]
+ans = []
+
+solution.solve(0, board, ans, n)
+print(ans)
+
+#TC->O(N!*N)
+#SC->o(n^2)
+
+#N-Queen Optimal Solution 
+class solution:#refer the same video if you have doubt
+    def solve(self,col,board,n,ans,left,Ud,lD):
+        if col==n:
+            ans.append(list(board))
+            return
+        for row in range(n):
+            if(left[row]==0 and
+               Ud[row+col]==0 and
+               lD[(n-1)+(row-col)]==0
+            ):
+                board[row]=board[row][:col]+"Q"+board[row][col+1:]
+                left[row]=1
+                Ud[row+col]=1
+                lD[(n-1)+(row-col)]=1
+                self.solve(col+1,board,n,ans,left,Ud,lD)
+                board[row]=board[row][:col]+"."+board[row][col+1:]
+                left[row]=0
+                Ud[row+col]=0
+                lD[(n-1)+(row-col)]=0
+
+    def SolveQueen(self,n:int)->list[list[str]]:
+        ans=[]
+        board=["."*n for _ in range(n)]
+        left=[0]*n
+        Ud=[0]*(2*n-1)
+        lD=[0]*(2*n-1)
+        self.solve(0,board,n,ans,left,Ud,lD)
+        return ans
+answer=solution()
+print(answer.SolveQueen(4))
+#TC->O(N!) because not isSafe traversal we would get in O(n)
+#SC->O(n^2)
+
