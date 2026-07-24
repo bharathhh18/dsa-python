@@ -314,3 +314,43 @@ print(answer.SolveQueen(4))
 #TC->O(N!) because not isSafe traversal we would get in O(n)
 #SC->O(n^2)
 
+#Rat in a maze problem
+#Hard question refer video if any doubts
+def findpath(i,j,a,n,ans,move,vis):
+    if i==n-1 and j==n-1:
+        ans.append(move)
+        return
+    #downward
+    if i+1<n and vis[i+1][j]==0 and a[i+1][j]==1:
+        vis[i][j]=1
+        findpath(i+1,j,a,n,ans,move+"D",vis)
+        vis[i][j]=0
+
+    #LEFT
+    if j-1>=0 and vis[i][j-1]==0 and a[i][j-1]==1:
+        vis[i][j]=1
+        findpath(i,j-1,a,n,ans,move+"L",vis)
+        vis[i][j]=0
+
+    #Right
+    if j+1<n and vis[i][j+1]==0 and a[i][j+1]==1:
+        vis[i][j]=1
+        findpath(i,j+1,a,n,ans,move+"R",vis)
+        vis[i][j]=0
+
+    #Up
+    if i-1>=0 and vis[i-1][j]==0 and a[i-1][j]==1:
+        vis[i][j]=1
+        findpath(i-1,j,a,n,ans,move+"U",vis)
+        vis[i][j]=0
+
+def solve(a):
+    ans=[]
+    n=len(a)
+    vis=[[0 for _ in range(n)] for _ in range(n)]
+    if a[0][0]==1:
+        findpath(0,0,a,n,ans,"",vis)
+    return ans
+matrix=[[1,0,0,0],[1,1,0,1],[1,1,0,0],[0,1,1,1]]
+print(solve(matrix))
+
