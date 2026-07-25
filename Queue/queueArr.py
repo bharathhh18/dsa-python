@@ -45,3 +45,35 @@ Queue.display()
 Queue.deque()
 Queue.deque()
 Queue.deque()
+
+#Using python libraries 
+class queue:
+    def __init__(self):
+        self.items = []
+
+    def enque(self, n):
+        self.items.append(n)
+
+    def deque(self):
+        if not self.items:
+            print("Queue is empty")
+            return
+        self.items.pop(0)
+        self.display()
+
+    def display(self):
+        if not self.items:
+            print("Queue is empty")
+        else:
+            for item in self.items:
+                print(item, end="\t")
+            print()
+
+Queue=queue()
+Queue.enque(10)
+Queue.enque(12)
+Queue.enque(19)        
+Queue.display()
+Queue.deque()
+Queue.deque()
+Queue.deque()
