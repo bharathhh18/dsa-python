@@ -70,3 +70,42 @@ q.display()
 q.pop()
 print()
 q.display()
+
+#implimentation of stack using queue
+class StackIUsingQueue:
+    def __init__(self):
+        self.stack1=[]
+        self.stack2=[]
+
+    def push(self,x):
+        while self.stack1:
+            self.stack2.append(self.stack1.pop())
+        self.stack1.append(x)
+        while self.stack2:
+            self.stack1.append(self.stack2.pop())
+
+    def pop(self):
+        if len(self.stack1)==0:
+            return "Stack is empty nothing to remove"
+        poped=self.stack1.pop()
+        return poped
+
+    def display(self):
+        if len(self.stack1)==0:
+            return "Stack is empty"
+        for num in self.stack1:
+            print(num)
+        print()
+
+    def top(self):
+        if len(self.stack1)==0:
+            return "Stack is empty"
+        return self.stack1[-1]
+
+stack=StackIUsingQueue()
+
+stack.push(10)
+stack.push(12)
+stack.display()
+stack.pop()
+stack.display()
