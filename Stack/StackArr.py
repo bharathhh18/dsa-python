@@ -172,3 +172,66 @@ s.push(20)
 s.display()
 s.pop()
 print(s.peek())
+
+#Implementing queue using doubly linked list
+class node:
+    def __init__(self,val):
+        self.val=val
+        self.prev=None
+        self.next=None
+
+
+class QueueUsingDll:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+
+    def enqueue(self,val):
+        newnode=node(val)
+        if self.head is None:
+            self.head=newnode
+            self.tail=newnode
+        elif self.head.next is None:
+            self.head.next=newnode
+            newnode.prev=self.head
+            self.tail=newnode
+        else:
+            self.tail.next=newnode
+            newnode.prev=self.tail
+            self.tail=newnode
+
+    def dequeue(self):
+        if self.head is None:
+            print("Queue is empty")    
+        elif self.head.next is None:
+            self.head,self.tail=None,None
+        else:
+            temp=self.head.next
+            self.head.next.prev=None
+            self.head.next=None
+            self.head=temp
+    def peek(self):
+        if self.head is None:
+            print("Queue is empty")
+            return
+        else:
+            return self.head.val
+    def display(self):
+        if self.head is None:
+            print("Node is empty")
+        else:
+            temp=self.head
+            while temp is not None:
+                print(temp.val,end="->")
+                temp=temp.next
+            print("None")
+
+s=QueueUsingDll()
+
+s.enqueue(10)
+s.enqueue(19)
+s.enqueue(20)
+s.display()
+s.dequeue()
+s.display()
+print(s.peek())
