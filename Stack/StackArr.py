@@ -109,3 +109,66 @@ stack.push(12)
 stack.display()
 stack.pop()
 stack.display()
+
+#Implimenting stack using doubly linked list
+class node:
+    def __init__(self,val):
+        self.val=val
+        self.prev=None
+        self.next=None
+
+
+class stackUsingDll:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+
+    def push(self,val):
+        newnode=node(val)
+        if self.head is None:
+            self.head=newnode
+            self.tail=newnode
+        elif self.head.next is None:
+            self.head.next=newnode
+            newnode.prev=self.head
+            self.tail=newnode
+        else:
+            self.tail.next=newnode
+            newnode.prev=self.tail
+            self.tail=newnode
+
+    def pop(self):
+        if self.head is None:
+            print("Linked List is empty")
+        elif self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            self.display()
+
+    def peek(self):
+        if self.head is None:
+            print("Node is empty")
+        else:
+            return self.tail.val
+
+    def display(self):
+        if self.head is None:
+            print("Node is empty")
+        else:
+            temp=self.head
+            while temp is not None:
+                print(temp.val,end="->")
+                temp=temp.next
+            print("None")
+
+s=stackUsingDll()
+
+s.push(10)
+s.push(19)
+s.push(20)
+s.display()
+s.pop()
+print(s.peek())
