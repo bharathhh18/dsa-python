@@ -28,7 +28,7 @@ class DoublyLinked:
     def __init__(self):
         self.head=None
     
-    def insert_at_head(self.val):#o(1)
+    def insert_at_head(self,val):#o(1)
         newnode=node(val)
         if self.head is None:
             self.head=newnode
