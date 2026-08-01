@@ -235,3 +235,27 @@ s.display()
 s.dequeue()
 s.display()
 print(s.peek())
+
+#Check for valid paranthesis using stack
+def validParanthesis(s):
+    stack=[]
+    if len(s)%2!=0:
+        return False
+    for bracket in s:
+        if bracket in ["(","{","["]:
+            stack.append(bracket)
+        else:
+            if not stack:#if stack is empty and we get a closing bracket then return false
+                return False
+            ch=stack.pop()
+            if bracket==")" and ch!="(":
+                return False
+            elif bracket=="}" and ch!="{":
+                return False
+            elif bracket=="]" and ch!="[":
+                return False
+
+    return len(stack)==0
+s=["(","{","[","]","}",")"]
+ans=validParanthesis(s)
+print(ans)
