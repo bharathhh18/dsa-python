@@ -259,3 +259,43 @@ def validParanthesis(s):
 s=["(","{","[","]","}",")"]
 ans=validParanthesis(s)
 print(ans)
+
+#Getting the min in the stack that to in O(1) time complexity
+class Stack:
+    def __init__(self):
+        self.items=[]
+
+    def push(self,n):
+        if len(self.items)==0:
+            self.items.append([n,n])
+        else:
+            mini=min(self.items[-1][1],n)
+            self.items.append([n,mini])
+
+    def popp(self):
+        if len(self.items)==0:
+            print("stack is empty")
+        x=self.items.pop()
+        return x
+
+    def display(self):
+        for i in range(len(self.items)):
+            print(self.items[i],end="\t")
+        print()
+
+    def topmost(self):
+        if self.items[-1]==None:
+            print("Stack is empty,no top element")
+        return self.items[-1]
+
+    def getMin(self):
+        if len(self.items)==0:
+            print("Stack is empty")
+            return None
+        return self.items[-1][1]
+s=Stack()
+s.push(10)
+s.push(29)
+s.push(2)
+s.display()
+print("Minimum element:", s.getMin())
